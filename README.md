@@ -40,6 +40,19 @@ See the benchmark dataset for example: http://dx.doi.org/10.7939/DVN/10968
 ## Citing
 If you use this code in your reseasrch, please acknowledge that by citing:
 
+    @inproceedings{DBLP:conf/cikm/GuoB14,
+      author    = {Zhaochen Guo and
+                   Denilson Barbosa},
+      title     = {Robust Entity Linking via Random Walks},
+      booktitle = {Proceedings of the 23rd {ACM} International Conference on Conference
+                   on Information and Knowledge Management, {CIKM} 2014, Shanghai, China,
+                   November 3-7, 2014},
+      pages     = {499--508},
+      year      = {2014},
+      url       = {http://doi.acm.org/10.1145/2661829.2661887},
+      doi       = {10.1145/2661829.2661887}
+    }
+    
 ## People
 * Zhaochen Guo
 * [Denilson Barbosa](http://webdocs.cs.ualberta.ca/~denilson/)
