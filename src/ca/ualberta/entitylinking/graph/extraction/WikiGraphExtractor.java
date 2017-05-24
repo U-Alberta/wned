@@ -15,7 +15,11 @@
  */
 package ca.ualberta.entitylinking.graph.extraction;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 import ca.ualberta.entitylinking.kb.wikipedia.wikixmlj.PageCallbackHandler;
@@ -92,12 +96,43 @@ public class WikiGraphExtractor implements PageCallbackHandler {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public void aggregateGraphEdges(String graphFile) {
+		try {
+			Map<String, Integer> map = new HashMap<>();
+
+			String line = null;
+			BufferedReader reader = new BufferedReader(new FileReader((graphFile)));
+			while ((line = reader.readLine()) != null) {
+				line = line.trim();
+				int count = map.getOrDefault(line, 0);
+				map.put(line, count+1);
+			}
+			reader.close();
+
+			PrintStream output = new PrintStream(graphFile + ".new");
+			for (String key : map.keySet()) {
+				output.println(key + "\t" + map.get(key));
+			}
+
+			output.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		WikiGraphExtractor obj = new WikiGraphExtractor();
-		obj.extract(args[0]);
+		String command = args[0];
+		String fileName = args[1];
+//		String command = "aggregate";
+//		String fileName = "test.txt";
+		if (command == "extract")
+			obj.extract(fileName);
+		else if (command == "aggregate")
+			obj.aggregateGraphEdges(fileName);
 	}
 }
