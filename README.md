@@ -24,8 +24,10 @@ WNED is an entity linking systems that accepts text with marked named entities a
   
 ### Graph generation
 * Generate the directed and undirected graph files
-    * java -cp $CP ca.ualberta.entitylinking.graph.extraction.WikiGraphExtractor path-to-english-wikipedia-dump
-* Store the graph using the WebGraph.
+    * java -cp $CP ca.ualberta.entitylinking.graph.extraction.WikiGraphExtractor extract path-to-english-wikipedia-dump
+* Aggregate graph edges and generate edge weights
+    * java -cp $CP ca.ualberta.entitylinking.graph.extraction.WikiGraphExtractor aggregate graph-file
+* Store the graph using the WebGraph (need to use the graphfile.new).
     * DirectedGraph: java -cp $CP ca.ualberta.entitylinking.graph.DirectedGraph path-to-graph-directory directed-graph-file
     * UndirectedGraph: java -cp $CP ca.ualberta.entitylinking.graph.UndirectedGraph path-to-graph-directory undirected-graph-file
 
