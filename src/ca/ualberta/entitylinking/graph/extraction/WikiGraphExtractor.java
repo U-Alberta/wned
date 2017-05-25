@@ -130,9 +130,9 @@ public class WikiGraphExtractor implements PageCallbackHandler {
 		String fileName = args[1];
 //		String command = "aggregate";
 //		String fileName = "test.txt";
-		if (command == "extract")
+		if (command.equals("extract"))
 			obj.extract(fileName);
-		else if (command == "aggregate")
+		else if (command.equals("aggregate"))
 			obj.aggregateGraphEdges(fileName);
 	}
 }
