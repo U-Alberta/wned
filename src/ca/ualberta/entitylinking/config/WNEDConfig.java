@@ -47,7 +47,6 @@ public class WNEDConfig {
     public static String linkGraphLoc = "";
     public static String cooccurrenceGraphLoc = "";
     public static String a2eIndexDir = "lucene-a2e";
-    public static String entityTypeFile = "entity.type";
     public static String tfidfIndexDir = "tfidfIndex";
     public static String gateHome = "gate8.1";
     public static String gateConfigPath="gate8.1/gate.xml";
@@ -114,9 +113,6 @@ public class WNEDConfig {
         cooccurrenceGraphLoc = systemDataPath + "/graph/" + prop.getProperty("cooccurGraph", "co-occurGraph");
 
         a2eIndexDir = systemDataPath + "/" + prop.getProperty("lucene-a2e", "a2eIndex");
-//        e2dIndexDir = systemDataPath + "/" + prop.getProperty("lucene-e2d", "lucene-e2d");
-//        a2dIndexDir = systemDataPath + "/" + prop.getProperty("lucene-a2d", "lucene-a2d");
-        entityTypeFile = systemDataPath + "/" + prop.getProperty("entityTypeFile", "entity.type");
         tfidfIndexDir = systemDataPath + "/" + prop.getProperty("tfidfIndex", "tfidfIndex");
         gateHome = systemDataPath + "/" + prop.getProperty("gateHome", "gate8.1");
         gateConfigPath = systemDataPath + "/" + prop.getProperty("gateConfigPath", gateConfigPath);

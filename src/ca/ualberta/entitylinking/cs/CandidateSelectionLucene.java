@@ -55,7 +55,8 @@ public class CandidateSelectionLucene extends CandidateSelection {
 		else
 			LOGGER.info("Load a2eIndex Done!!!");
 
-		loadEntityType(WNEDConfig.entityTypeFile);
+		//Entity type does not help so far, so disable it for now.
+//		loadEntityType(WNEDConfig.entityTypeFile);
 		LOGGER.info("Load entity type done!!");
 	}
 
