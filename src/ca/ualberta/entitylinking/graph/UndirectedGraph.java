@@ -15,6 +15,7 @@
  */
 package ca.ualberta.entitylinking.graph;
 
+import ca.ualberta.entitylinking.config.WNEDConfig;
 import it.unimi.dsi.webgraph.labelling.ArcLabelledNodeIterator;
 import it.unimi.dsi.webgraph.labelling.BitStreamArcLabelledImmutableGraph;
 import it.unimi.dsi.webgraph.labelling.Label;
@@ -190,8 +191,16 @@ public class UndirectedGraph extends WeightedGraph {
 		return outLinks2(entName);
 	}
 
+	/**
+	 * Graph is transformed and saved under systemDataPath/graph
+	 * GraphName is defined in the configuration file.
+	 * @param argv
+	 * 		argv[0] is the config file: e.g. el.config
+	 * 		argv[1] is the graph file to be saved.
+	 */
 	public static void main(String[] argv) {
-		UndirectedGraph graph = new UndirectedGraph(argv[0]);
+		WNEDConfig.loadConfiguration(argv[0]);
+		UndirectedGraph graph = new UndirectedGraph(WNEDConfig.cooccurrenceGraphLoc);
 		graph.storeGraph(argv[1]);
 	}
 }

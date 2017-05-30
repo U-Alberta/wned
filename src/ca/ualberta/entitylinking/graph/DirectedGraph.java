@@ -15,6 +15,7 @@
  */
 package ca.ualberta.entitylinking.graph;
 
+import ca.ualberta.entitylinking.config.WNEDConfig;
 import it.unimi.dsi.webgraph.labelling.ArcLabelledImmutableGraph;
 import it.unimi.dsi.webgraph.labelling.ArcLabelledNodeIterator;
 import it.unimi.dsi.webgraph.labelling.BitStreamArcLabelledImmutableGraph;
@@ -36,7 +37,7 @@ public class DirectedGraph extends WeightedGraph {
 
     String graphPath2 = null;
 	ArcLabelledImmutableGraph bitgraph2 = null;
-	
+
 	public DirectedGraph(String graphPath) {
 		super(graphPath);
 		this.graphPath2 = graphPath + "2";
@@ -229,8 +230,16 @@ public class DirectedGraph extends WeightedGraph {
 		return links2(entName, false);
 	}
 
+	/**
+	 * Graph is transformed and saved under systemDataPath/graph
+	 * GraphName is defined in the configuration file.
+	 * @param argv
+	 * 		argv[0] is the config file: e.g. el.config
+	 * 		argv[1] is the graph file to be saved.
+	 */
 	public static void main(String[] argv) {
-		DirectedGraph graph = new DirectedGraph(argv[0]);
+		WNEDConfig.loadConfiguration(argv[0]);
+		DirectedGraph graph = new DirectedGraph(WNEDConfig.linkGraphLoc);
 		graph.storeGraph(argv[1]);
 	}
 }
