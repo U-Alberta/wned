@@ -1,0 +1,139 @@
+<ivy-module version="2.0">
+
+  <info organisation="uk.ac.gate" module="gate-core" revision="8.1-SNAPSHOT">
+    <ivyauthor name="Mark A. Greenwood" />
+    <description homepage="http://gate.ac.uk" />
+  </info>
+ 
+  <!-- by default we want the master artifact and its runtime dependencies
+       for each of the dependencies we include - if we want more/less then it
+       is trivial to specify a conf attribute on the dependency itself -->
+  <configurations defaultconfmapping="required->master,runtime">
+    <conf name="required" visibility="private" description="all these dependencies are always needed" />
+    <conf name="compile" extends="required" description="all the required stuff plus things only needed for compilation (i.e. javacc)" />
+    <conf name="runtime" extends="required" description="all the required stuff plus things needed at runtime (i.e. the tika parsers)" />
+    <conf name="test" extends="runtime,compile" description="we need everything if we want to run the tests" />
+    <conf name="all" extends="runtime,compile" description="absolutely every dependency we have listed" />
+
+    <!-- these are used if someone else references us -->
+    <conf name="master" />
+    <conf name="default" extends="master,all" />
+  </configurations>
+
+  <dependencies>	
+    <!-- things that we repackage under an alternative package name -->
+    <dependency org="uk.ac.gate" name="gate-asm" rev="3.1" conf="required->master" />
+    <dependency org="uk.ac.gate" name="gate-compiler-jdt" rev="4.3.2-P20140317-1600" conf="required->master" />
+
+    <!-- needed to ensure the same version across configurations -->
+    <dependency org="commons-logging" name="commons-logging" rev="1.1.3" />
+
+    <!-- used for escaping strings in the Annotation Stack and elsewhere -->
+    <dependency org="commons-lang" name="commons-lang" rev="2.6" />
+
+    <!-- used to load files into String variables as well as helping to close streams etc. -->
+    <dependency org="commons-io" name="commons-io" rev="2.4" />
+
+    <!-- the logging framework GATE uses -->
+    <dependency org="log4j" name="log4j" rev="1.2.17" />
+
+    <!-- used extensively throughout GATE for processing XML files -->
+    <dependency org="org.jdom" name="jdom" rev="1.1.3"/>
+
+    <!-- used to parse and load HTML documents into GATE -->
+    <dependency org="net.sourceforge.nekohtml" name="nekohtml" rev="1.9.14" />
+
+    <!-- we use Tika to handle most document formats other than XML, HTML and TXT -->
+    <dependency org="org.apache.tika" name="tika-parsers" rev="1.7" conf="runtime->master,runtime" >
+      <!-- we don't currently use the RSS/ATOM aspects of Tika so we don't need ROME -->
+      <exclude org="rome" module="rome" />
+
+      <!-- we don't currently support netCDF documents so we don't need this -->
+      <exclude org="edu.ucar" module="netcdf" />
+
+      <!-- we don't use Tika to parse HTML so we don't need it's HTML parser -->
+      <exclude org="org.ccil.cowan.tagsoup" module="tagsoup" />
+
+      <!-- we don't use Tika to parse Java classes so we don't need ASM -->
+      <exclude org="asm" module="asm" />
+      <exclude org="org.ow2.asm" module="asm-debug-all" />
+      
+      <!-- we aren't using any of the GUI aspects of tika so we don't need to be
+           able to do syntax highlighting -->
+      <exclude org="com.uwyn" module="jhighlight" />
+
+      <!-- we exclude boilerpipe as it isn't required for Tika given the way we
+           currently configure it, and it contains a copy of NekoHTML which causes
+           HTML parsing in GATE to change, and the tests to break -->
+      <exclude org="de.l3s.boilerpipe" module="boilerpipe" />
+      
+      <!-- we don't handle audio files so we don't need the following -->
+      <exclude org="org.gagravarr" module="vorbis-java-tika" />
+      <exclude org="org.gagravarr" module="vorbis-java-core" />
+      <exclude org="com.googlecode.mp4parser" module="isoparser" />
+      
+      <!-- no idea what these are used for internally to tika but we don't seem to need them -->
+      <exclude org="com.googlecode.juniversalchardet" module="juniversalchardet" />
+      <exclude org="org.tukaani" module="xz" />
+      <exclude org="com.adobe.xmp" module="xmpcore" />
+
+      <!-- we are not handling Matlab files so we don't need this -->
+      <exclude org="net.sourceforge.jmatio" module="jmatio" />
+
+      <!-- we are most certainly not supporting the parsing of Outlook PST files! -->
+      <exclude org="com.pff" module="java-libpst" />
+
+      <!-- we don't support images so we don't need their metadata -->
+      <exclude org="com.drewnoakes" module="metadata-extractor" />
+    </dependency>
+
+    <!-- We use Woodstox instead of the default Sun StAX implementation as it seems to behave better.
+         NOTE: I don't know if this is still the case but it seems safer not to break things! -->
+    <dependency org="org.codehaus.woodstox" name="woodstox-core-lgpl" rev="4.2.0">
+      <exclude org="javax.xml.stream" module="stax-api" />
+    </dependency>
+
+    <!-- we need Ivy both for processing this file and for creole plugins which use the IVY element -->
+    <dependency org="org.apache.ivy" name="ivy" rev="2.3.0" />
+
+    <!-- ANT is used internally by GATE for some tasks, such as the export for GATECloud.net -->
+    <dependency org="org.apache.ant" name="ant" rev="1.9.3" />
+        
+    <!--required for loading and saving .gapp files and by sime plugins.
+        we pull in the full XPP3 so we only need XStream's master artifact -->
+    <dependency org="com.thoughtworks.xstream" name="xstream" rev="1.4.7" conf="required->master" />
+
+    <!-- XPP3 provides the actual implementation under pinning our use of XStream -->
+    <dependency org="xpp3" name="xpp3" rev="1.1.4c" conf="runtime->master,runtime" />
+
+    <!-- needed by XSteam at runtime -->
+    <dependency org="jaxen" name="jaxen" rev="1.1.6" conf="runtime->master" />
+
+    <!-- used to parse command line options passed to the GATE GUI -->
+    <dependency org="gnu.getopt" name="java-getopt" rev="1.0.13" />
+
+    <!-- required for Spring Framework support in GATE -->
+    <dependency org="org.springframework" name="spring-aop" rev="2.5.6.SEC01" />
+    
+    <!-- required for outputting documents as JSON -->
+    <dependency org="com.fasterxml.jackson.core" name="jackson-databind" rev="2.3.2" />
+    
+    <!-- required for the new controller metadata viewer -->
+    <dependency org="org.xhtmlrenderer" name="flying-saucer-core" rev="9.0.4" />
+
+    <!-- Used for comparing XML files during some of the GATE tests -->
+    <dependency org="xmlunit" name="xmlunit" rev="1.5" conf="required->master" />
+
+    <!-- Used for date and time formatting and parsing -->
+    <dependency org="joda-time" name="joda-time" rev="2.6" />
+
+    <!-- Used for testing GATE -->
+    <dependency org="junit" name="junit" rev="4.11" conf="compile->master,compile" />
+
+    <!-- exclude stuff that is part of Java 6 core -->
+    <exclude org="xml-apis" module="xml-apis" />
+    <exclude org="stax" module="stax-api" />
+    <exclude org="org.apache.geronimo.specs" module="geronimo-stax-api_1.0_spec" />
+  </dependencies>
+
+</ivy-module>

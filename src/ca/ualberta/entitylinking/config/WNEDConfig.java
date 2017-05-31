@@ -205,8 +205,10 @@ public class WNEDConfig {
         targetFile = prop.getProperty("targetFile", "");
 
         //get the RawText directory.
-        String dir = targetFile.substring(0, targetFile.lastIndexOf('/'));
-        WNEDConfig.DATASET_DIR = dir + "/RawText/";
+        if (targetFile != null && !targetFile.isEmpty() && targetFile.contains(("/"))) {
+            String dir = targetFile.substring(0, targetFile.lastIndexOf('/'));
+            WNEDConfig.DATASET_DIR = dir + "/RawText/";
+        }
 
         loaded = true;
     }
