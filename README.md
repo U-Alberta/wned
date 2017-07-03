@@ -46,11 +46,11 @@ WNED is an entity linking systems that accepts text with marked named entities a
 * Update the el.config with the root directory.
 * ./run.sh
 
-## Input
+## Data
 See the benchmark dataset for example: http://dx.doi.org/10.7939/DVN/10968 
 
 ## Citing
-If you use this code in your reseasrch, please acknowledge that by citing:
+If you use this code in your research, please acknowledge that by citing:
 
     @inproceedings{DBLP:conf/cikm/GuoB14,
       author    = {Zhaochen Guo and
