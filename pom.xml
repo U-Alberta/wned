@@ -14,14 +14,6 @@
     <build>
         <sourceDirectory>src</sourceDirectory>
         <outputDirectory>target/classes</outputDirectory>
-        <resources>
-        	<resource>
-        		<directory>.</directory>
-        		<includes>
-        			<include>**/*.xml</include>
-        		</includes>
-        	</resource>
-        </resources>
 
         <directory>target</directory>
         <finalName>wned-1.0</finalName>
@@ -56,10 +48,10 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.0</version>
-		<configuration>
-		  <source>1.8</source>
-		  <target>1.8</target>
-		</configuration>
+                <configuration>
+                  <source>1.8</source>
+                  <target>1.8</target>
+                </configuration>
                 <executions>
                     <execution>
                         <id>default-compile</id>
@@ -129,6 +121,18 @@
             <artifactId>webgraph</artifactId>
             <version>3.0.9</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/it.unimi.dsi/dsiutils -->
+        <dependency>
+            <groupId>it.unimi.dsi</groupId>
+            <artifactId>dsiutils</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/fastutil/fastutil -->
+        <dependency>
+            <groupId>fastutil</groupId>
+            <artifactId>fastutil</artifactId>
+            <version>5.0.9</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>
@@ -153,6 +157,18 @@
             <groupId>com.sleepycat</groupId>
             <artifactId>je</artifactId>
             <version>4.0.92</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.21</version>
         </dependency>
         <!--
         <dependency>
