@@ -125,7 +125,7 @@
         <dependency>
             <groupId>it.unimi.dsi</groupId>
             <artifactId>dsiutils</artifactId>
-            <version>2.2.4</version>
+            <version>2.0.10</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/fastutil/fastutil -->
         <dependency>
@@ -178,6 +178,11 @@
         </dependency>
         -->
 
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.1.2</version>
+        </dependency>
         <!--Private libraries -->
         <dependency>
             <groupId>es.yrbcn.graph</groupId>
