@@ -7,7 +7,7 @@ WNED is an entity linking systems that accepts text with marked named entities a
 
 ## System Setup
 * Export environment:
-  *export CP=target/wned-1.0-jar-with-dependencies.jar:lib/*:.*
+  *export CP=target/wned-1.0-jar-with-dependencies.jar:lib/*&ast;:.*
 * Create directory to put all needed system data (see el.config for example)
   In the following instructions, we assume all data are put under $PWD/entitylinking  (NOTE: change it to the path on your computer)
   Before you run WNED, we should have the following data ready under $PWD/entitylinking
